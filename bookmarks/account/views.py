@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -29,3 +29,8 @@ def user_login(request):
     else:
         form = LoginForm(request.POST)
         return render(request, 'account/login.html', {'form': form})
+
+
+def user_logout(request):
+    logout(request)
+    return render(request, 'account/logout.html')
