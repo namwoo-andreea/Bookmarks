@@ -12,7 +12,7 @@ def user_login(request):
         # Check a validity of the form
         if form.is_valid():
             # Assign cleaned data which created in process of is_valid()
-            cd = form.cleaned_datad
+            cd = form.cleaned_data
             # Authenticate user with cleaned data, return user or None
             user = authenticate(username=cd['username'],
                                 password=cd['password'])

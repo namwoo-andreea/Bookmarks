@@ -20,6 +20,12 @@ f = open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json'))
 config_secret_common_str = f.read()
 config_secret_common = json.loads(config_secret_common_str)
 
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+STATIC_URL = '/static/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
