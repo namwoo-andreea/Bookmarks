@@ -31,7 +31,7 @@ STATIC_URL = '/static/'
 # Login
 LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
 LOGIN_URL = reverse_lazy('account:login')
-LOGOUT_URL = reverse_lazy('account:logout')
+LOGOUT_REDIRECT_URL = reverse_lazy('account:dashboard')  # Rediect to Login page
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
