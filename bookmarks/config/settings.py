@@ -26,6 +26,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = '/static/'
 
+LOGIN_URL = 'login/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
