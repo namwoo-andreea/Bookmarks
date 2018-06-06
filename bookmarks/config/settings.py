@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -66,15 +67,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ROOT_URLCONF = 'config.urls'
 
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-
+ACCOUNT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'account'), 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            TEMPLATES_DIR,
+            ACCOUNT_TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -135,3 +137,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email
+EMAIL_HOST = config_secret_common["django"]["email"]["HOST"]
+EMAIL_HOST_USER = config_secret_common["django"]["email"]["HOST_USER"]
+EMAIL_HOST_PASSWORD = config_secret_common["django"]["email"]["HOST_PASSWORD"]
+EMAIL_PORT = config_secret_common["django"]["email"]["PORT"]
+EMAIL_USE_TLS = config_secret_common["django"]["email"]["USE_TLS"]
