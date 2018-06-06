@@ -22,11 +22,16 @@ f = open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json'))
 config_secret_common_str = f.read()
 config_secret_common = json.loads(config_secret_common_str)
 
+# Static
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 STATIC_URL = '/static/'
+
+# Media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Login
 LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
