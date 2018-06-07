@@ -17,6 +17,7 @@ from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Config secret
 CONFIG_SECRET_DIR = os.path.join(BASE_DIR, '.config_secret')
 f = open(os.path.join(CONFIG_SECRET_DIR, 'settings_common.json'))
 config_secret_common_str = f.read()
@@ -43,6 +44,12 @@ LOGOUT_REDIRECT_URL = reverse_lazy('account:dashboard')  # Rediect to Login page
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config_secret_common['django']['SECRET_KEY']
+
+# Authentication backend
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -129,19 +136,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Email
 EMAIL_HOST = config_secret_common["django"]["email"]["HOST"]
