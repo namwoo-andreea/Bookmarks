@@ -39,6 +39,10 @@ LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
 LOGIN_URL = reverse_lazy('account:login')
 LOGOUT_REDIRECT_URL = reverse_lazy('account:dashboard')  # Rediect to Login page
 
+# Social Auth
+SOCIAL_AUTH_FACEBOOK_KEY = config_secret_common['facebook']['APP_ID']
+SOCIAL_AUTH_FACEBOOK_SECRET = config_secret_common['facebook']['SECRET_KEY']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -49,12 +53,17 @@ SECRET_KEY = config_secret_common['django']['SECRET_KEY']
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
 ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'mysite.com',
+]
 
 # Application definition
 
@@ -67,6 +76,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'django_extensions',
+    'social_django',
 ]
 
 MIDDLEWARE = [

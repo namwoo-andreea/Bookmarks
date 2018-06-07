@@ -22,6 +22,7 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
+    path('social_auth', include('social_django.urls', namespace='social')),
     path('account/', include('account.urls')),
 ]
 
