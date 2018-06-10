@@ -8,7 +8,7 @@ from images.forms import ImageCreateForm
 @login_required
 def image_create(request):
     if request.method == 'POST':
-        form = ImageCreateForm(request.POST)
+        form = ImageCreateForm(data=request.POST)
         if form.is_valid():
             new_item = form.save(commit=False)
             new_item.user = request.user
@@ -17,7 +17,7 @@ def image_create(request):
 
             return redirect(new_item.get_absolute_url())
     else:
-        form = ImageCreateForm()
+        form = ImageCreateForm(data=request.GET)
 
     return render(request, 'images/image/create.html',
                   {'section': 'images',
