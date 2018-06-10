@@ -4,5 +4,9 @@
 
 {% block content %}
     <h1>Dashboard</h1>
+
+    <p>Drag it to your bookmarks toolbar ->
+        <a href="javascript:{% include 'images/bookmarklet_launcher.js' %}" class="button">Bookmark it</a>
+    </p>
     <p>Welcome to your dashboard. you can <a href="{% url 'account:edit' %}">edit profile</a></p>
 {% endblock %}
