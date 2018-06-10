@@ -94,12 +94,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-ACCOUNT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'account'), 'templates')
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            ACCOUNT_TEMPLATES_DIR,
+            TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
