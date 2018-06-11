@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -28,11 +29,39 @@ def image_create(request):
                    'form': form})
 
 
+@login_required
+def image_list(request):
+    """
+    if page number is not integer, deliver first page
+    if page is out of range, deliver empty page
+    """
+    images = Image.objects.all()
+    paginator = Paginator(images, 8)
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        images = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            return HttpResponse('')
+        images = paginator.page(paginator.num_pages)
+
+    if request.is_ajax():
+        return render(request, 'images/image/list_ajax.html',
+                      {'section': 'image',
+                       'images': images})
+    return render(request, 'images/image/list.html',
+                  {'section': 'image',
+                   'images': images})
+
+
 def image_detail(request, pk, slug):
     image = get_object_or_404(Image, pk=pk, slug=slug)
     return render(request, 'images/image/detail.html',
                   {'section': 'image',
                    'image': image})
+
 
 @ajax_required
 @login_required
