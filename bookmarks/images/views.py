@@ -36,7 +36,7 @@ def image_list(request):
     if page is out of range, deliver empty page
     """
     images = Image.objects.all()
-    paginator = Paginator(images, 8)
+    paginator = Paginator(images, 12)
     page = request.GET.get('page')
     try:
         images = paginator.page(page)
