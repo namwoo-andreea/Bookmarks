@@ -1,11 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Profile
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+
+User = get_user_model()
 
 
 @login_required
@@ -87,3 +89,19 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, 'account/logout.html')
+
+
+@login_required
+def user_list(request):
+    users = User.objects.filter(is_active=True)
+    return render(request, 'account/list.html',
+                  {'section': 'people',
+                   'users': users})
+
+
+@login_required
+def user_detail(request, username):
+    user = get_object_or_404(User, username=username, is_active=True)
+    return render(request, 'account/detail.html',
+                  {'section': 'people',
+                   'user': user})
