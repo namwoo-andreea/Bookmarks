@@ -56,8 +56,9 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
 ]
 
+# Absolute URL
 ABSOLUTE_URL_OVERRIDES = {
-    'auth.user': lambda u: reverse_lazy('account:detail',
+    'auth.user': lambda u: reverse_lazy('account:user-detail',
                                         args=[u.username]),
 }
 
