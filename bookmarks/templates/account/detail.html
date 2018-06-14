@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load thumbnail %}
 
 {% block title %}Bookmark{% endblock %}
@@ -10,24 +11,30 @@
         {% endthumbnail %}
     </div>
     {% with total_followers=user.followers.count total_following=user.following.count %}
-        <span class="count">
+        <span class="count followers">
             <span class="total">{{ total_followers }}</span>
                 follower{{ total_followers|pluralize }}
         </span>
-        <span class="count">
+        <span class="count following">
             <span class="total">{{ total_following }}</span>
                  following{{ total_following|pluralize }}
         </span>
-        <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}
-        un{% endif %}follow" class="follow button">
-            {% if request.user not in user.followers.all %}
-                Follow
-            {% else %}
-                Unfollow
-            {% endif %}
-        </a>
+        {% if request.user.id == user.id %}
+        {% else %}
+            <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}
+                un{% endif %}follow" class="follow button">
+                {% if request.user not in user.followers.all %}
+                    Follow
+                {% else %}
+                    Unfollow
+                {% endif %}
+            </a>
+        {% endif %}
         <div id="image-list" class="image-container">
             {% include "images/image/list_ajax.html" with images=user.images_bookmarked.all %}
         </div>
     {% endwith %}
+{% endblock %}
+{% block domready %}
+    <script src="{% static 'js/follow_ajax.js' %}"></script>
 {% endblock %}
