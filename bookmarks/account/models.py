@@ -36,3 +36,5 @@ User.add_to_class('following', models.ManyToManyField('self',
                                                       through=Contact,
                                                       related_name='followers',
                                                       symmetrical=False))
+
+
