@@ -9,4 +9,11 @@
         <a href="javascript:{% include 'images/bookmarklet_launcher.js' %}" class="button">Bookmark it</a>
     </p>
     <p>Welcome to your dashboard. you can <a href="{% url 'account:edit' %}">edit profile</a></p>
-{% endblock %}
+
+    <h2>What's happening</h2>
+    <!--<div id="action-list">-->
+        <!--{% for action in actions %}-->
+            <!--{{ action.user.username }} {{ action.verb }} {{ action.target }}-->
+        <!--{% endfor %}-->
+    <!--</div>-->
+{% endblock %}      
