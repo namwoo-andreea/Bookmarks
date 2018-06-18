@@ -69,6 +69,8 @@ def image_detail(request, pk, slug):
     image = get_object_or_404(Image, pk=pk, slug=slug)
     # Increment total image views by 1
     total_views = r.incr('image:{}:views'.format(image.id))
+    # Increment image ranking by 1
+    r.zincrby('image_ranking', image.id, 1)
     return render(request, 'images/image/detail.html',
                   {'section': 'image',
                    'image': image,
@@ -94,3 +96,14 @@ def image_like(request):
         except:
             pass
     return JsonResponse({'status': 'ok'})
+
+
+@login_required
+def image_ranking(request):
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
+    image_ranking_ids = [int(id) for id in image_ranking]
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))  # x is Image object
+    return render(request, 'images/image/ranking.html',
+                  {'section': 'images',
+                   'most_viewed': most_viewed})

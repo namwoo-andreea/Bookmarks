@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}bookmark{% endblock %}
+
+{% block content %}
+    <h1>Most viewed</h1>
+    {% load thumbnail %}
+    {% for image in most_viewed %}
+        <span class="image">
+            <a href="{{ image.get_absolute_url }}">
+                {% thumbnail image.image "300x300" crop="100%" as im %}
+                <img src="{{ im.url }}">
+                {% endthumbnail %}
+            </a>
+        </span>
+    {% endfor %}
+{% endblock %}
