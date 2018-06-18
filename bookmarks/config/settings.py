@@ -167,3 +167,8 @@ EMAIL_HOST_USER = config_secret_common["django"]["email"]["HOST_USER"]
 EMAIL_HOST_PASSWORD = config_secret_common["django"]["email"]["HOST_PASSWORD"]
 EMAIL_PORT = config_secret_common["django"]["email"]["PORT"]
 EMAIL_USE_TLS = config_secret_common["django"]["email"]["USE_TLS"]
+
+# Redis
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
